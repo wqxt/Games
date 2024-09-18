@@ -19,6 +19,7 @@ TagManager:
   - BoxB
   - BoxA
   - GameButton
+  - Ground
   layers:
   - Default
   - TransparentFX
