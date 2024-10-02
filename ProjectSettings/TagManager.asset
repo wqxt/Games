@@ -20,6 +20,13 @@ TagManager:
   - BoxA
   - GameButton
   - Ground
+  - MainMenu
+  - SettingsPanel
+  - Play
+  - Back
+  - Settings
+  - Character
+  - Enemy
   layers:
   - Default
   - TransparentFX

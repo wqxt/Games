@@ -6,17 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/VRGame/Scenes/BootstrapScene.unity
+    path: Assets/_VRGame/Scenes/BootstrapScene.unity
     guid: 29c081601dd505042958c4f47aa5fc94
   - enabled: 1
-    path: Assets/VRGame/Scenes/MainMenuScene.unity
+    path: Assets/_VRGame/Scenes/MainMenuScene.unity
     guid: e083b6ee3cc23424cb38c94f3cf1a0d4
   - enabled: 1
-    path: Assets/VRGame/Scenes/GameplayScene.unity
+    path: Assets/_VRGame/Scenes/GameplayScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/Gameplay.unity
     guid: c6aac39799a660341aca0b24b148d066
+  - enabled: 1
+    path: Assets/_PlatformerGame/Scenes/GamePlay.unity
+    guid: b014d51c103b0dc4a9aad11c52a22c8c
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 94aeffe0b94fec94fa34da681f8d8c94,
       type: 2}
