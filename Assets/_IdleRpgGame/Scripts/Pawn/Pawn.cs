@@ -6,7 +6,7 @@ public class Pawn : MonoBehaviour
 {
     [SerializeField] private Weapon _startWeapon;
     [SerializeField] private Armor _startArmor;
-    [SerializeField] private IdleGameConfiguration _gameConfiguration;
+    //[SerializeField] private IdleGameState _gameConfiguration;
     [SerializeField] private PawnConfiguration _configuration;
     [SerializeField] internal protected Animator _fightIndicatorAnimator;
     [SerializeField] internal protected Animator _pawnAnimator;
@@ -20,18 +20,7 @@ public class Pawn : MonoBehaviour
     internal protected AttackState _attackState;
     internal protected EntryState _entryState;
 
-    public IdleGameConfiguration GameConfiguration
-    {
-        get
-        {
-            return _gameConfiguration;
-        }
 
-        set
-        {
-            _gameConfiguration = value;
-        }
-    }
 
     public PawnConfiguration PawnConfiguration
     {
@@ -51,7 +40,7 @@ public class Pawn : MonoBehaviour
 
         if (PawnConfiguration.Type.Equals("Character"))
         {
-            GameConfiguration.CurrentState = GameState.EntryState;
+            IdleGameState.CurrentState = GameState.EntryState;
         }
 
         _prepareAttackSprite.gameObject.SetActive(false);

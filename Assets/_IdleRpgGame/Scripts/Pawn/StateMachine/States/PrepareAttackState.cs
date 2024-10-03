@@ -58,7 +58,7 @@ namespace IdleGame.StateMachine
                 _stateMachine.ChangeState(_pawn._attackState);
             }
 
-            if( _pawn.GameConfiguration.CurrentState != GameState.FightState)
+            if( IdleGameState.CurrentState != GameState.FightState)
             {
                 _stateMachine.ChangeState(_pawn._entryState);
             }

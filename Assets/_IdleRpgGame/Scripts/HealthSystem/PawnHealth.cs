@@ -18,13 +18,17 @@ public class PawnHealth
         {
             _pawn.PawnConfiguration.CurrentHealthValue -= damage;
             ChangeHealth?.Invoke(_pawn.PawnConfiguration.CurrentHealthValue, _pawn);
+            if(_pawn.PawnConfiguration.CurrentHealthValue <= 0)
+            {
+                PawnDeath?.Invoke(_pawn);
+            }
         }
 
     }
 
     public void Death()
     {
-
+        IdleGameState.CurrentState = GameState.EntryState;
     }
 
 }

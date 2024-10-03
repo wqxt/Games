@@ -1,9 +1,7 @@
-using UnityEngine;
 
-[CreateAssetMenu(fileName = "IdleGameConfiguration", menuName = "Scriptable Object/GameConfiguration")]
-public class IdleGameConfiguration : ScriptableObject
+public static class IdleGameState 
 {
-    public GameState CurrentState { get; set; }
+    public static GameState CurrentState { get; set; }
 }
 public enum GameState
 {

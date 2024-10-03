@@ -22,7 +22,7 @@ namespace IdleGame.StateMachine
 
         public override void Update()
         {
-            if (_currentAnimationTime > 0f && _pawn.GameConfiguration.CurrentState == GameState.FightState)
+            if (_currentAnimationTime > 0f && IdleGameState.CurrentState == GameState.FightState)
             {
                 _currentAnimationTime -= Time.deltaTime;
             }

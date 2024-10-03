@@ -14,7 +14,7 @@ namespace IdleGame.StateMachine
 
         public override void LateUpdate()
         {
-            if (_pawn.GameConfiguration.CurrentState == GameState.EntryState)
+            if (IdleGameState.CurrentState == GameState.EntryState)
             {
                 _pawn._fightIndicatorAnimator.speed = 0;
                 _pawn._pawnAnimator.speed = 0;
@@ -26,7 +26,7 @@ namespace IdleGame.StateMachine
             {
 
 
-                if (_pawn.PawnConfiguration.Type == "Character")
+                if (_pawn.PawnConfiguration.Type != "Character")
                 {
                     _stateMachine.ChangeState(_pawn._prepareAttackState);
 

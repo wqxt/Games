@@ -3,13 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class GameplayCanvas : MonoBehaviour
 {
-    [SerializeField] private IdleGameConfiguration _gameConfiguration;
+
     [SerializeField] private PawnConfiguration _characterConfiguration;
     [SerializeField] private GameObject _healButton;
 
     private void LateUpdate()
     {
-        if (_gameConfiguration.CurrentState == GameState.EntryState)
+        if (IdleGameState.CurrentState == GameState.EntryState)
         {
             _healButton.SetActive(true);
         }
@@ -18,7 +18,7 @@ public class GameplayCanvas : MonoBehaviour
     //Unity event
     public void MainMenu()
     {
-        _gameConfiguration.CurrentState = GameState.MainMenuState;
+        IdleGameState.CurrentState = GameState.MainMenuState;
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -32,11 +32,11 @@ public class GameplayCanvas : MonoBehaviour
         else
         {
             _healButton.SetActive(false);
-            _gameConfiguration.CurrentState = GameState.FightState;
+            IdleGameState.CurrentState = GameState.FightState;
         }
 
     }
 
-    public void Escape() => _gameConfiguration.CurrentState = GameState.EntryState;
+    public void Escape() => IdleGameState.CurrentState = GameState.EntryState;
     public void Heal() => _characterConfiguration.CurrentHealthValue = _characterConfiguration.StartHealthValue;
 }

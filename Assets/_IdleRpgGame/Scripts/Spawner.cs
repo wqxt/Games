@@ -41,17 +41,19 @@ public class Spawner : MonoBehaviour
 
         for (int i = 0; i < _pawnPool.EnemyPool.Length; i++)
         {
+            Pawn enemyPawn = Instantiate(_pawnPool.EnemyPool[i], _enemyTransform.transform.position, Quaternion.identity, _pawnParentTransform.transform);
+            enemyPawn.transform.rotation = new Quaternion(0, 0, 0, 0);
+            _pawnPool.ScenePawnList.Add(enemyPawn);
+
+
+            PawnHealth healthModel = new PawnHealth(enemyPawn);
+            _pawnPool.HealthModelList.Add(healthModel);
+            break;
+
             cumulativeChance += _pawnPool.EnemyPool[i].PawnConfiguration.SpawnChance;
             if (randomValue <= cumulativeChance)
             {
-                Pawn enemyPawn = Instantiate(_pawnPool.EnemyPool[i], _enemyTransform.transform.position, Quaternion.identity, _pawnParentTransform.transform);
-                enemyPawn.transform.rotation = new Quaternion(0, 0, 0, 0);
-                _pawnPool.ScenePawnList.Add(enemyPawn);
 
-
-                PawnHealth healthModel = new PawnHealth(enemyPawn);
-                _pawnPool.HealthModelList.Add(healthModel);
-                break;
             }
         }
     }
