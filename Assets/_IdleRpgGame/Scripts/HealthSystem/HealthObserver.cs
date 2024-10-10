@@ -5,58 +5,116 @@ public class HealthObserver : MonoBehaviour
     [SerializeField] private HealthView[] _healthview;
     [SerializeField] private PawnPool _pawnPool;
 
-    public void OnEnable()
+    private void Start()
+    {
+        SetupViews();
+        SetupSubscribe();
+    }
+
+    private void SetupSubscribe()
     {
         foreach (Pawn pawn in _pawnPool.ScenePawnList)
         {
             pawn._attackState.Attacked += TakeDamage;
         }
 
-        foreach (var healthModel in _pawnPool.HealthModelList)
+        foreach (var healthModel in _pawnPool.PawnHealthList)
         {
-            healthModel.PawnDeath += Death;
-            healthModel.ChangeHealth += ChangeHealth;
+            healthModel.PawnDeath += PawnDeath;
+            healthModel.ChangeHealth += ChangeHealthView;
+            healthModel.PawnHealthRemove += EnemyPawnHealthUnSubscribe;
         }
-
     }
 
-    public void OnDisable()
+    public void SetupViews()
     {
-        foreach (Pawn pawn in _pawnPool.ScenePawnList)
+        foreach (var view in _healthview)
         {
-            pawn._attackState.Attacked -= TakeDamage;
-        }
-
-        foreach (var healthModel in _pawnPool.HealthModelList)
-        {
-            healthModel.ChangeHealth -= ChangeHealth;
-            healthModel.PawnDeath -= Death;
+            foreach (var pawn in _pawnPool.ScenePawnList)
+            {
+                if (pawn.PawnConfiguration.Type == view.tag)
+                {
+                    view.SetupHealth(pawn.PawnConfiguration.StartHealthValue);
+                }
+            }
         }
     }
 
-    private void Death(Pawn pawn)
+    private void PawnDeath(string pawnType)
     {
-        foreach (var healthModel in _pawnPool.HealthModelList)
-        {
-            healthModel.Death();
-        }
+        EnemyPawnHealthSubscribe(pawnType);
+        SetupNewEnemyPawnView();
     }
 
-    private void TakeDamage(int damage, Pawn pawn)
+    public void EnemyPawnHealthSubscribe(string pawnType)
     {
-        foreach (var healthModel in _pawnPool.HealthModelList)
+        foreach (var healthModel in _pawnPool.PawnHealthList)
         {
-            healthModel.TakeDamage(damage, pawn);
+            if (healthModel._pawn.PawnConfiguration.Type == pawnType)
+            {
+                healthModel.PawnDeath += PawnDeath;
+                healthModel.ChangeHealth += ChangeHealthView;
+                healthModel._pawn._attackState.Attacked += TakeDamage;
+                healthModel.PawnHealthRemove += EnemyPawnHealthUnSubscribe;
+            }
         }
     }
 
-    private void ChangeHealth(int currentHealth, Pawn pawn)
+    private void EnemyPawnHealthUnSubscribe(PawnHealth health)
+    {
+        health.PawnDeath -= PawnDeath;
+        health.ChangeHealth -= ChangeHealthView;
+        health._pawn._attackState.Attacked -= TakeDamage;
+        health.PawnHealthRemove -= EnemyPawnHealthUnSubscribe;
+    }
+
+
+    public void SetupNewEnemyPawnView()
+    {
+        foreach (var view in _healthview)
+        {
+            foreach (var pawn in _pawnPool.ScenePawnList)
+            {
+                if (pawn.PawnConfiguration.Type == view.tag && pawn.PawnConfiguration.Type != "Character")
+                {
+                    view.SetupHealth(pawn.PawnConfiguration.StartHealthValue);
+                }
+            }
+        }
+    }
+
+    private void TakeDamage(int damage, string pawnType)
+    {
+        for (int i = 0; i < _pawnPool.PawnHealthList.Count; i++)
+        {
+            var healthModel = _pawnPool.PawnHealthList[i];
+            healthModel.TakeDamage(damage, pawnType);
+        }
+
+    }
+
+    private void ChangeHealthView(int currentHealth, string pawnType)
     {
         foreach (var healthView in _healthview)
         {
-            if (pawn.PawnConfiguration.Type == healthView.tag)
+            if (pawnType.Equals(healthView.tag))
             {
                 healthView.ChangeHealth(currentHealth);
+            }
+        }
+    }
+
+    public void HealCharacter() //unity button
+    {
+        foreach (var view in _healthview)
+        {
+            foreach (var pawn in _pawnPool.ScenePawnList)
+            {
+                if (pawn.PawnConfiguration.Type == view.tag && view.tag == "Character")
+                {
+                    pawn.PawnConfiguration.CurrentHealthValue = pawn.PawnConfiguration.MaxHealthValue;
+                    view.ChangeHealth(pawn.PawnConfiguration.MaxHealthValue);
+                }
             }
         }
     }

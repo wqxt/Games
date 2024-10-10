@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PawnConfiguration", menuName = "Scriptable Object/Configuration")]
@@ -18,6 +19,9 @@ public class PawnConfiguration : ScriptableObject
     [SerializeField] private int _currentAttackDamage;
     [SerializeField] private int _pawnDamage;
     [SerializeField] private float _spawnChance;
+    [SerializeField] public Transform PawnTransform;
+
+    public event Action<string> PawnDeath;
 
     public int CurrentAttackDamage { get; set; }
     public string Type
@@ -105,7 +109,8 @@ public class PawnConfiguration : ScriptableObject
         {
             if (value > 100)
             {
-                _maxHealthValue = 100;
+                _maxHealthValue = _startHealthValue;
+
             }
             else
             {
@@ -130,7 +135,7 @@ public class PawnConfiguration : ScriptableObject
     {
         get
         {
-  
+
             return _currentHealthValue;
         }
 
@@ -139,6 +144,8 @@ public class PawnConfiguration : ScriptableObject
 
             if (value < 0 || value == 0)
             {
+
+                PawnDeath?.Invoke(Type);
                 _currentHealthValue = 0;
             }
             else

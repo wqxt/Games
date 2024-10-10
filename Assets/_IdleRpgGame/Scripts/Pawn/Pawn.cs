@@ -1,25 +1,21 @@
 ﻿using UnityEngine;
 using IdleGame.StateMachine;
-using System;
 
 public class Pawn : MonoBehaviour
 {
     [SerializeField] private Weapon _startWeapon;
     [SerializeField] private Armor _startArmor;
-    //[SerializeField] private IdleGameState _gameConfiguration;
     [SerializeField] private PawnConfiguration _configuration;
     [SerializeField] internal protected Animator _fightIndicatorAnimator;
     [SerializeField] internal protected Animator _pawnAnimator;
     [SerializeField] internal protected GameObject _prepareAttackSprite;
     [SerializeField] internal protected GameObject _switchWeaponSprite;
     [SerializeField] internal protected GameObject _attackSprite;
-
     internal protected StateMachine _stateMachine;
     internal protected PrepareAttackState _prepareAttackState;
     internal protected SwitchWeaponState _switchWeaponState;
     internal protected AttackState _attackState;
     internal protected EntryState _entryState;
-
 
 
     public PawnConfiguration PawnConfiguration
@@ -37,12 +33,6 @@ public class Pawn : MonoBehaviour
 
     private void Awake()
     {
-
-        if (PawnConfiguration.Type.Equals("Character"))
-        {
-            IdleGameState.CurrentState = GameState.EntryState;
-        }
-
         _prepareAttackSprite.gameObject.SetActive(false);
         _attackSprite.gameObject.SetActive(false);
         _switchWeaponSprite.gameObject.SetActive(false);

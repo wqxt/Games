@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9215873625457924966}
   m_Layer: 0
-  m_Name: FightStateIndicator
+  m_Name: FightState Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

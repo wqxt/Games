@@ -8,6 +8,7 @@ namespace IdleGame.StateMachine
 
         public override void Enter()
         {
+            //IdleGameState.CurrentState = GameState.EntryState;
             _pawn._fightIndicatorAnimator.speed = 0;
             _pawn._pawnAnimator.speed = 0;
         }
@@ -24,11 +25,12 @@ namespace IdleGame.StateMachine
             }
             else
             {
-
-
-                if (_pawn.PawnConfiguration.Type != "Character")
+                
+                ///test
+                _stateMachine.ChangeState(_pawn._prepareAttackState);
+                if (_pawn.PawnConfiguration.Type == "Character")
                 {
-                    _stateMachine.ChangeState(_pawn._prepareAttackState);
+
 
                 }
                 else

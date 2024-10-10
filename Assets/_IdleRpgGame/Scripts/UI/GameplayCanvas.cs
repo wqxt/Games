@@ -11,7 +11,7 @@ public class GameplayCanvas : MonoBehaviour
     {
         if (IdleGameState.CurrentState == GameState.EntryState)
         {
-            _healButton.SetActive(true);
+            //_healButton.SetActive(true);
         }
 
     }

@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5733318817818913233}
   m_Layer: 5
-  m_Name: CharacterAvatar
+  m_Name: Character Avatar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

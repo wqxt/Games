@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 2206109590693529493}
   - component: {fileID: 6347632869248337940}
   m_Layer: 5
-  m_Name: GameplayIdleCanvas
+  m_Name: Gameplay Idle Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

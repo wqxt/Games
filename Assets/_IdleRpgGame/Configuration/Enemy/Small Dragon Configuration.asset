@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b84d48a260243834bb791f760c73d6f6, type: 3}
-  m_Name: MeduzaConfiguration
+  m_Name: Small Dragon Configuration
   m_EditorClassIdentifier: 
   _currentWeapon: {fileID: 11400000, guid: 1f4d4ee271973484d88010b32779c988, type: 2}
   _currentArmor: {fileID: 11400000, guid: 049ae9382c4874c4a8a3b7930b761fb5, type: 2}
   _type: Enemy
-  _startHealthValue: 50
-  _currentHealthValue: 0
-  _maxHealthValue: 50
+  _startHealthValue: 100
+  _currentHealthValue: 100
+  _maxHealthValue: 100
   _minHealthValue: 0
   _attackTime: 1
   _prepareAttackTime: 1
   _meleeAttack: 1
   _switchWeaponTime: 2
-  _currentAttackDamage: 10
-  _pawnDamage: 5
+  _currentAttackDamage: 0
+  _pawnDamage: 100
   _spawnChance: 40

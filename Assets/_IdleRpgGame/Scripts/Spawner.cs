@@ -4,23 +4,21 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private Transform _enemyTransform;
     [SerializeField] private Transform _characterTransform;
-    [SerializeField] private PawnPool _pawnPool;
     [SerializeField] private GameObject _pawnParentTransform;
-    [SerializeField] private GameObject _healthPresenter;
+
+    [SerializeField] private HealthObserver _healthObserver;
+    [SerializeField] private PawnPool _pawnPool;
 
     private void Awake()
     {
-        _pawnPool.ScenePawnList = new();
-        _pawnPool.HealthModelList = new();
+        _pawnPool.Setup();
         SpawnCharacter();
         SpawnEnemy();
         SpawnHealthObserver();
     }
 
-    public void SpawnHealthObserver()
-    {
-        var healthObserver = Instantiate(_healthPresenter,transform.position,Quaternion.identity, _pawnParentTransform.transform);
-    }
+
+    public void SpawnHealthObserver() => _healthObserver = Instantiate(_healthObserver, transform.position, Quaternion.identity, _pawnParentTransform.transform);
 
     private void SpawnCharacter()
     {
@@ -29,8 +27,8 @@ public class Spawner : MonoBehaviour
         _pawnPool.ScenePawnList.Add(characterPawn);
 
 
-        PawnHealth healthModel = new PawnHealth(characterPawn);
-        _pawnPool.HealthModelList.Add(healthModel);
+        PawnHealth healthModel = new PawnHealth(characterPawn, this);
+        _pawnPool.PawnHealthList.Add(healthModel);
 
     }
 
@@ -41,34 +39,42 @@ public class Spawner : MonoBehaviour
 
         for (int i = 0; i < _pawnPool.EnemyPool.Length; i++)
         {
-            Pawn enemyPawn = Instantiate(_pawnPool.EnemyPool[i], _enemyTransform.transform.position, Quaternion.identity, _pawnParentTransform.transform);
-            enemyPawn.transform.rotation = new Quaternion(0, 0, 0, 0);
-            _pawnPool.ScenePawnList.Add(enemyPawn);
-
-
-            PawnHealth healthModel = new PawnHealth(enemyPawn);
-            _pawnPool.HealthModelList.Add(healthModel);
-            break;
 
             cumulativeChance += _pawnPool.EnemyPool[i].PawnConfiguration.SpawnChance;
             if (randomValue <= cumulativeChance)
             {
+                Pawn enemyPawn = Instantiate(_pawnPool.EnemyPool[i], _enemyTransform.transform.position, Quaternion.identity, _pawnParentTransform.transform);
+                enemyPawn.transform.rotation = new Quaternion(0, 0, 0, 0);
+                _pawnPool.ScenePawnList.Add(enemyPawn);
+
+                PawnHealth healthModel = new PawnHealth(enemyPawn, this);
+                _pawnPool.PawnHealthList.Add(healthModel);
+                break;
 
             }
         }
     }
 
-    public void RemovePawn(Pawn pawn)
+    public void RemovePawn(string pawnType)
     {
         for (int i = 0; i < _pawnPool.ScenePawnList.Count; i++)
         {
-            if (_pawnPool.ScenePawnList[i].PawnConfiguration.Type == pawn.PawnConfiguration.Type)
+            if (_pawnPool.ScenePawnList[i].PawnConfiguration.Type == pawnType && _pawnPool.ScenePawnList[i].PawnConfiguration.Type != "Character")
             {
+
+                for (int j = 0; j < _pawnPool.PawnHealthList.Count; j++)
+                {
+                    if (_pawnPool.PawnHealthList[j]._pawn.PawnConfiguration.Type == _pawnPool.ScenePawnList[i].PawnConfiguration.Type)
+                    {
+                        _pawnPool.PawnHealthList.RemoveAt(j);
+                    }
+                }
+
                 _pawnPool.ScenePawnList[i].gameObject.SetActive(false);
                 Destroy(_pawnPool.ScenePawnList[i].gameObject);
                 _pawnPool.ScenePawnList.RemoveAt(i);
-                SpawnEnemy();
 
+                SpawnEnemy();
             }
         }
     }
