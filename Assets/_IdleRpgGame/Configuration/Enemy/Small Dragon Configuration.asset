@@ -16,7 +16,7 @@ MonoBehaviour:
   _currentArmor: {fileID: 11400000, guid: 049ae9382c4874c4a8a3b7930b761fb5, type: 2}
   _type: Enemy
   _startHealthValue: 100
-  _currentHealthValue: 100
+  _currentHealthValue: 30
   _maxHealthValue: 100
   _minHealthValue: 0
   _attackTime: 1
@@ -24,5 +24,6 @@ MonoBehaviour:
   _meleeAttack: 1
   _switchWeaponTime: 2
   _currentAttackDamage: 0
-  _pawnDamage: 100
+  _pawnDamage: 1
   _spawnChance: 40
+  PawnTransform: {fileID: 0}

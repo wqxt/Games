@@ -467,6 +467,11 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1430296287075845493, guid: 3906f65a6a7191d47b876597a31b9554,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2599647473341241428, guid: 3906f65a6a7191d47b876597a31b9554,
         type: 3}
       propertyPath: m_Pivot.x
@@ -571,6 +576,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gameplay Idle Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894631533947597220, guid: 3906f65a6a7191d47b876597a31b9554,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 467
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894631533947597220, guid: 3906f65a6a7191d47b876597a31b9554,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -143
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894631533947597220, guid: 3906f65a6a7191d47b876597a31b9554,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8540784507675061823, guid: 3906f65a6a7191d47b876597a31b9554,
         type: 3}
