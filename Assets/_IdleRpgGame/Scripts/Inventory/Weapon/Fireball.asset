@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Fireball
   _attackSpeed: 2.1
-  _damageValue: 25
+  _damageValue: 0
   _type: Range

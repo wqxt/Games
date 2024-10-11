@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b84d48a260243834bb791f760c73d6f6, type: 3}
-  m_Name: MeduzaConfiguration
+  m_Name: Meduza Configuration
   m_EditorClassIdentifier: 
   _currentWeapon: {fileID: 11400000, guid: 1f4d4ee271973484d88010b32779c988, type: 2}
   _currentArmor: {fileID: 11400000, guid: 049ae9382c4874c4a8a3b7930b761fb5, type: 2}

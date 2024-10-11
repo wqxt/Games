@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: PoisonousSpit
   _attackSpeed: 1
-  _damageValue: 5
+  _damageValue: 0
   _type: Range

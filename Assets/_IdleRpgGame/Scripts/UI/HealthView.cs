@@ -13,4 +13,12 @@ public class HealthView : MonoBehaviour
         _healthSlider.value = currentHealthValue;
         _currentHealthValueText.text = _healthSlider.value.ToString();
     }
+
+    internal void SetupHealth(int startHealthValue)
+    {
+        _healthSlider.maxValue = startHealthValue;
+        _healthSlider.value = startHealthValue;
+        _maxHealthValueText.text = startHealthValue.ToString();
+        _currentHealthValueText.text = _healthSlider.value.ToString();
+    }
 }

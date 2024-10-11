@@ -8,5 +8,12 @@ public class PawnPool : ScriptableObject
     [SerializeField] internal protected Pawn Character;
 
     internal protected List<Pawn> ScenePawnList { get; set; }
-    internal protected List<PawnHealth> HealthModelList { get; set; }
+    internal protected List<PawnHealth> PawnHealthList { get; set; } 
+
+    public void Setup()
+    {
+        ScenePawnList = new List<Pawn>();
+        PawnHealthList = new List<PawnHealth>();
+    }
+    
 }

@@ -1,4 +1,3 @@
-
 public static class IdleGameState 
 {
     public static GameState CurrentState { get; set; }

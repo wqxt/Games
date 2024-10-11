@@ -8,7 +8,7 @@ namespace IdleGame.StateMachine
         private float _currentAnimationTime;
         private bool _meleeAttack;
         
-        public event Action<int,Pawn> Attacked;
+        public event Action<int,string> Attacked;
         public AttackState(Pawn pawn, StateMachine stateMachine) : base(pawn, stateMachine) { }
 
         public override void Enter()
@@ -57,7 +57,7 @@ namespace IdleGame.StateMachine
         public override void Exit()
         {
 
-            Attacked?.Invoke(_pawn.PawnConfiguration.CurrentAttackDamage,_pawn);
+            Attacked?.Invoke(_pawn.PawnConfiguration.CurrentAttackDamage,_pawn.PawnConfiguration.Type);
 
             _pawn._fightIndicatorAnimator.Play("Indicator", 0, 0f);
 

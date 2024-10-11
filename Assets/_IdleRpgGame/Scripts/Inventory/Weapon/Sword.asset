@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Sword
   _attackSpeed: 1
-  _damageValue: 10
+  _damageValue: 0
   _type: Melee
