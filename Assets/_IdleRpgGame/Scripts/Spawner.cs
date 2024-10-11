@@ -18,14 +18,12 @@ public class Spawner : MonoBehaviour
     }
 
 
-    public void SpawnHealthObserver() => _healthObserver = Instantiate(_healthObserver, transform.position, Quaternion.identity, _pawnParentTransform.transform);
+    public void SpawnHealthObserver() => _healthObserver = Instantiate(_healthObserver, transform.position, new Quaternion(0, 0, 0, 0), _pawnParentTransform.transform);
 
     private void SpawnCharacter()
     {
-        Pawn characterPawn = Instantiate(_pawnPool.Character, _characterTransform.transform.position, Quaternion.identity, _pawnParentTransform.transform);
-        characterPawn.transform.rotation = new Quaternion(0, 0, 0, 0);
+        Pawn characterPawn = Instantiate(_pawnPool.Character, _characterTransform.transform.position, new Quaternion(0, 0, 0, 0), _pawnParentTransform.transform);
         _pawnPool.ScenePawnList.Add(characterPawn);
-
 
         PawnHealth healthModel = new PawnHealth(characterPawn, this);
         _pawnPool.PawnHealthList.Add(healthModel);
@@ -39,17 +37,17 @@ public class Spawner : MonoBehaviour
 
         for (int i = 0; i < _pawnPool.EnemyPool.Length; i++)
         {
+            Pawn enemyPawn = Instantiate(_pawnPool.EnemyPool[i], _enemyTransform.transform.position, new Quaternion(0, 0, 0, 0), _pawnParentTransform.transform);
+            _pawnPool.ScenePawnList.Add(enemyPawn);
+
+            PawnHealth healthModel = new PawnHealth(enemyPawn, this);
+            _pawnPool.PawnHealthList.Add(healthModel);
+            break;
 
             cumulativeChance += _pawnPool.EnemyPool[i].PawnConfiguration.SpawnChance;
             if (randomValue <= cumulativeChance)
             {
-                Pawn enemyPawn = Instantiate(_pawnPool.EnemyPool[i], _enemyTransform.transform.position, Quaternion.identity, _pawnParentTransform.transform);
-                enemyPawn.transform.rotation = new Quaternion(0, 0, 0, 0);
-                _pawnPool.ScenePawnList.Add(enemyPawn);
 
-                PawnHealth healthModel = new PawnHealth(enemyPawn, this);
-                _pawnPool.PawnHealthList.Add(healthModel);
-                break;
 
             }
         }
