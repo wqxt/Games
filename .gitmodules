@@ -1,0 +1,6 @@
+[submodule "Assets/ExternalGames/IdleRpg"]
+	path = Assets/ExternalGames/IdleRpg
+	url = https://github.com/wqxt/IdleRpg.git
+[submodule "Assets/ExternalGames/Platformer"]
+	path = Assets/ExternalGames/Platformer
+	url = https://github.com/wqxt/PlatformerExample.git
