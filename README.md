@@ -1,5 +1,9 @@
 
-Using unity 2022.3.20f1
+Unity 2022.3.20f1
+
+Do "setup_sparse_checkout.sh " before the first launch of the project to setup submodules.
+	bash 
+./setup_sparse_checkout.sh
 
 Some screenshot:
 
