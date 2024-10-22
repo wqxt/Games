@@ -10,26 +10,28 @@ fi
 echo "Инициализация сабмодулей..."
 git submodule update --init --recursive
 
-# Настройка sparse-checkout для сабмодуля IdleRpg и переключение на ветку main
-echo "Инициализация sparse-checkout и переключение на ветку main для сабмодуля IdleRpg..."
+read -p "Введите имя ветки для сабмодуля IdleRpg (по умолчанию 'main'): " idle_branch
+idle_branch=${idle_branch:-main}  
+
+echo "Инициализация sparse-checkout и переключение на ветку '$idle_branch' для сабмодуля IdleRpg..."
 cd Assets/ExternalGames/IdleRpg || exit
-git checkout main || git checkout -b main  # Переключение на ветку main, если она существует, или создание
-git pull origin main  # Подтянуть изменения из ветки main
+git checkout "$idle_branch" || git checkout -b "$idle_branch"  
+git pull origin "$idle_branch"  
 git sparse-checkout init --cone                      
 git sparse-checkout set Assets/_IdleRpgGame                            
 cd -
 
-# Настройка sparse-checkout для сабмодуля Platformer и переключение на ветку main
-echo "Инициализация sparse-checkout и переключение на ветку main для сабмодуля Platformer..."
+read -p "Введите имя ветки для сабмодуля Platformer (по умолчанию 'main'): " platformer_branch
+platformer_branch=${platformer_branch:-main}  
+
+echo "Инициализация sparse-checkout и переключение на ветку '$platformer_branch' для сабмодуля Platformer..."
 cd Assets/ExternalGames/Platformer || exit
-git checkout main || git checkout -b main  # Переключение на ветку main, если она существует, или создание
-git pull origin main  # Подтянуть изменения из ветки main
+git checkout "$platformer_branch" || git checkout -b "$platformer_branch" 
+git pull origin "$platformer_branch"  
 git sparse-checkout init --cone                     
 git sparse-checkout set Assets/_Platformer 
 cd -
 
-# Обновление сабмодулей
 echo "Обновление сабмодулей..."
 git submodule update --remote --recursive       
-
 echo "Сабмодули успешно настроены!"
